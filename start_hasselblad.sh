@@ -14,6 +14,11 @@ sleep 2 # 稍微暫停 2 秒，確保 Port 被完全釋放
 # 2. 進入專案資料夾並從 GitHub 更新最新文件
 cd "$PROJECT_DIR" || exit
 echo "Pulling the latest files from GitHub..."
+
+# ✅ 這裡改用強制覆蓋邏輯
+git fetch --all
+git reset --hard origin/main  # 這一行會直接放棄 NAS 上的本地變更，強迫跟 GitHub 一模一樣
+
 git checkout .  # 放棄所有 NAS 上未提交的修改，確保與 GitHub 完全一致
 git pull origin main
 
